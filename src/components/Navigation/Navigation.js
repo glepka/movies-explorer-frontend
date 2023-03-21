@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Navigation.css';
-import accoutButton from '../../images/account.svg'
+import AccountButton from '../AccountButton/AccountButton';
 
 function Navigation() {
   return (
@@ -20,8 +20,8 @@ function Navigation() {
       Сохранённые фильмы
     </Link>
   </nav>
-  <Link to='/profile' className='header__account-button'>
-              <img src={accoutButton} alt='Кнопка аккаунта'/>
+  <Link to='/profile' className='navigation__account-button'>
+              <AccountButton />
             </Link>
       </div>
 

@@ -40,9 +40,12 @@ cursor: pointer;
   .movies__list{
     grid-template-columns: repeat(2, minmax(min-content, max-content));
     gap: 30px;
+    padding: 70px 10px 0px ;
 
 }
 }
+
+
 
 @media screen and (max-width: 660px) {
   .movies__list{

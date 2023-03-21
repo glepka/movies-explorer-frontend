@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './Header.css';
 import logo from '../../images/logo.svg'
 import Navigation from '../Navigation/Navigation';
-import accoutButton from '../../images/account.svg'
+import AccountButton from '../AccountButton/AccountButton';
 
 
 function Header() {
@@ -35,11 +35,15 @@ function Header() {
             </Link>
         <nav className='header__nav'>
         <div className='header__movies-container'>
-            <p className='header__link'>Фильмы</p>
-            <p className='header__link'>Сохранённые фильмы</p>
+        <Link to='/movies' className='header__link'>
+        Фильмы
+            </Link>
+            <Link to='/saved-movies' className='header__link'>
+            Сохранённые фильмы
+            </Link>
         </div>
         <Link to='/profile' className='header__account-button'>
-              <img src={accoutButton} alt='Кнопка аккаунта'/>
+              <AccountButton />
             </Link>
         </nav>
 

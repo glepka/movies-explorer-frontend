@@ -69,6 +69,7 @@
     font-size: 13px;
     line-height: 18px;
     color: #000000;
+    text-decoration: none;
 
 }
 
@@ -92,13 +93,7 @@
 }
 
 .header__account-button {
-  width: 100px;
-  height: 32px;
-  background: #ffffff;
-  border-radius: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  text-decoration: none;
 }
 
 .header__account-button:hover {
@@ -122,6 +117,11 @@
     .header__movies-container{
       display: none;
     }
+
+    .header__account-button {
+      display: none;
+    }
+
 
 
 }

@@ -22,12 +22,5 @@
     font-size: 14px;
     line-height: 16px;
     color: #000000;
+    }
 
-}
-
-@media screen and (max-width: 1023px) {
-    /* .account-button{
-        display: none;
-
-    } */
-}

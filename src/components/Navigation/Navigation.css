@@ -70,7 +70,18 @@ border-bottom: 2px solid transparent;
 }
 
 
+.navigation__account-button{
+  text-decoration: none;
+}
 
-@media screen and (max-width: 1023px) {
+
+@media screen and (max-width: 660px) {
+  .navigation__container{
+    padding-top: 144px;
+    padding-bottom: 46px;
+    width: 320px;
+
+  }
+
 
 }

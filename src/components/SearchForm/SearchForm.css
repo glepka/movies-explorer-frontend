@@ -40,6 +40,12 @@ line-height: 20px;
 color: #A0A0A0;
 }
 
+.search-form__input:focus{
+  outline: 1px solid #E8E8E8;
+  border-radius: 5px;
+  }
+
+
 .search-form__button{
     padding: 6px 29px;
     border: none;
@@ -56,14 +62,25 @@ color: #A0A0A0;
     opacity: 0.7;
 }
 
+@media screen and (max-width: 1150px) {
+  .search-form{
+    padding: 70px 10px 69px;
+
+}
+
+}
 
 @media screen and (max-width: 1023px) {
   .search-form{
     padding: 80px 0px;
     margin: 0 30px;
+
+
 }
 
 }
+
+
 
 
 @media screen and (max-width: 660px) {
