@@ -12,10 +12,12 @@ function Movies() {
     return(
         <>
         <Header />
+        <main>
         <section className='movies'>
         <SearchForm />
         <MoviesCardList />
         </section>
+        </main>
         <Footer />
         </>
     )

@@ -11,11 +11,12 @@ function SavedMovies() {
     return(
         <>
         <Header />
-
+        <main>
         <section className='movies'>
         <SearchForm />
         <MoviesCardList />
         </section>
+        </main>
         <Footer />
         </>
     )
