@@ -1,5 +1,6 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Route, Switch, useHistory, useLocation, Redirect } from 'react-router-dom';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import './App.css';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -11,43 +12,212 @@ import Profile from '../Profile/Profile';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Movies from '../Movies/Movies';
 
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
+import * as api from '../../utils/MainApi';
 
 
 function App() {
-return (
 
+  const history = useHistory();
+  const location = useLocation();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState({});
+  const [savedMovies, setSavedMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const path = location.pathname;
+
+
+  //Проверка токена и авторизация пользователя
+  useEffect(() => {
+    const jwt = localStorage.getItem('jwt');
+
+    if (jwt) {
+      api
+        .getContent(jwt)
+        .then((res) => {
+          if (res) {
+            localStorage.removeItem('allMovies');
+            setIsLoggedIn(true);
+          }
+          history.push(path);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, []);
+
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      api
+        .getUserInfo()
+        .then((profileInfo) => {
+          setCurrentUser(profileInfo);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      api
+        .getCards()
+        .then((cardsData) => {
+          setSavedMovies(cardsData.reverse());
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [isLoggedIn, history]);
+
+  //регистрация пользователя
+  function handleRegister({ name, email, password }) {
+    api
+      .register(name, email, password)
+      .then(() => {
+        handleAuthorize({ email, password });
+        console.log(123)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+
+  //авторизация пользователя
+  function handleAuthorize({ email, password }) {
+    setIsLoading(true);
+    api
+      .authorize(email, password)
+      .then((res) => {
+        if (res) {
+          setIsLoggedIn(true);
+          localStorage.setItem('jwt', res.token);
+          history.push('./movies');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }
+
+
+  function handleUpdateUser(newUserInfo) {
+    setIsLoading(true);
+    api
+      .setUserInfo(newUserInfo)
+      .then((data) => {
+        setCurrentUser(data);
+      })
+      .catch((err) => {
+        console.log(err);
+        handleUnauthorized(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }
+
+  function handleUnauthorized(err) {
+    if (err === 'Error: 401') {
+      handleSignOut();
+    }
+  }
+
+  // Выход
+  const handleSignOut = () => {
+    setIsLoggedIn(false);
+    localStorage.removeItem('jwt');
+    localStorage.removeItem('movies');
+    localStorage.removeItem('movieSearch');
+    localStorage.removeItem('shortMovies');
+    localStorage.removeItem('allMovies');
+    history.push('/');
+  };
+
+
+  function handleLikeClick(card) {
+    api
+      .postCard(card)
+      .then((newMovie) => {
+        setSavedMovies([newMovie, ...savedMovies]);
+      })
+      .catch((err) => {
+        console.log(err);
+        handleUnauthorized(err);
+      });
+  }
+
+  function handleCardDelete(card) {
+    api
+      .deleteCard(card._id)
+      .then(() => {
+        setSavedMovies((state) => state.filter((item) => item._id !== card._id));
+      })
+      .catch((err) => {
+        console.log(err);
+        handleUnauthorized(err);
+      });
+  }
+
+
+
+return (
+<CurrentUserContext.Provider value={currentUser}>
   <div className="page">
   <div className="page__content">
     <Switch>
       <Route exact path="/">
-        <Header />
+        <Header loggedIn={isLoggedIn} />
         <Main />
-        <Footer /> 
+        <Footer />
       </Route>
       <Route path="/signin">
-        <Login />
+      {!isLoggedIn ? (
+                <Login onAuthorize={handleAuthorize} isLoading={isLoading} />
+              ) : (
+                <Redirect to="/" />
+              )}
       </Route>
       <Route path="/signup">
-        <Register />
+      {!isLoggedIn ? (
+                <Register onRegister={handleRegister} isLoading={isLoading} />
+              ) : (
+                <Redirect to="/" />
+              )}
       </Route>
-      <Route path="/movies">
-        <Movies />
-      </Route>
-      <Route path="/saved-movies">
-        <SavedMovies />
-      </Route>
-      <Route path="/profile">
-        <Header />
-        <Profile />
-      </Route>
+      <ProtectedRoute
+              path="/movies"
+              component={Movies}
+              savedMovies={savedMovies}
+              loggedIn={isLoggedIn}
+              onCardDelete={handleCardDelete}
+              handleLikeClick={handleLikeClick}
+              ></ProtectedRoute>
+      <ProtectedRoute
+              path="/saved-movies"
+              savedMovies={savedMovies}
+              loggedIn={isLoggedIn}
+              onCardDelete={handleCardDelete}
+              component={SavedMovies}></ProtectedRoute>
+      <ProtectedRoute
+              path="/profile"
+              signOut={handleSignOut}
+              onUpdateUser={handleUpdateUser}
+              loggedIn={isLoggedIn}
+              component={Profile}
+              isLoading={isLoading}></ProtectedRoute>
       <Route path="/*">
         <NotFound />
       </Route>
     </Switch>
   </div>
 </div>
-    
+</CurrentUserContext.Provider>
   );
 }
 
