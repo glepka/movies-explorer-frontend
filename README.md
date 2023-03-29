@@ -7,3 +7,5 @@ https://disk.yandex.ru/d/Y6ZHCIwEGF2HCg
 
 Ссылка на пул реквест: https://github.com/glepka/movies-explorer-frontend/pull/2
 
+Ссылка выложенный на сервер фронтенд: https://glepka.movies.nomoredomains.work/movies
+
