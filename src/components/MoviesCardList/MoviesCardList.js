@@ -21,54 +21,60 @@ function MoviesCardList({
   onCardDelete }) {
 
 
-const [shownMovies, setShownMovies] = useState(0);
-const { pathname } = useLocation();
+  const [shownMovies, setShownMovies] = useState(0);
+  const { pathname } = useLocation();
 
-function shownCount() {
-  const display = window.innerWidth;
-  if (display > 1180) {
-    setShownMovies(16);
-  } else if (display > 1023) {
-    setShownMovies(12);
-  } else if (display > 800) {
-    setShownMovies(8);
-  } else if (display < 800) {
-    setShownMovies(5);
+  function shownCount() {
+    const display = window.innerWidth;
+    if (display > 1180) {
+      setShownMovies(16);
+    } else if (display > 1023) {
+      setShownMovies(12);
+    } else if (display > 800) {
+      setShownMovies(8);
+    } else if (display < 800) {
+      setShownMovies(5);
+    }
   }
-}
 
-useEffect(() => {
-  shownCount();
-}, []);
+  useEffect(() => {
+    shownCount();
+  }, []);
 
-useEffect(() => {
-  setTimeout(() => {
-    window.addEventListener('resize', shownCount);
-  }, 500);
-});
+  useEffect(() => {
+    setTimeout(() => {
+      window.addEventListener('resize', shownCount);
+    }, 500);
 
-function showMore() {
-  const display = window.innerWidth;
-  if (display > 1180) {
-    setShownMovies(shownMovies + SHOW_MORE_DECKTOP);
-  } else if (display > 1023) {
-    setShownMovies(shownMovies + SHOW_MORE_TABLET);
+    return () => {
+      setTimeout(() => {
+        window.removeEventListener('resize', shownCount);
+      });
+    }
+  });
+
+  function showMore() {
+    const display = window.innerWidth;
+    if (display > 1180) {
+      setShownMovies(shownMovies + SHOW_MORE_DECKTOP);
+    } else if (display > 1023) {
+      setShownMovies(shownMovies + SHOW_MORE_TABLET);
+    }
+    else if (display < 1023) {
+      setShownMovies(shownMovies + SHOW_MORE_MOBILE);
+    }
   }
-  else if (display < 1023) {
-    setShownMovies(shownMovies + SHOW_MORE_MOBILE);
+
+  function getSavedMovieCard(savedMovies, card) {
+    return savedMovies.find((savedMovie) => savedMovie.movieId === card.id);
   }
-}
-
-function getSavedMovieCard(savedMovies, card) {
-  return savedMovies.find((savedMovie) => savedMovie.movieId === card.id);
-}
 
 
-    return(
-      <>
-        {isLoading && <Preloader />}
-        {isNotFound && !isLoading && <SearchError errorText={'Ничего не найдено'} />}
-        {isReqErr && !isLoading && (
+  return (
+    <>
+      {isLoading && <Preloader />}
+      {isNotFound && !isLoading && <SearchError errorText={'Ничего не найдено'} />}
+      {isReqErr && !isLoading && (
         <SearchError
           errorText={
             'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз'
@@ -128,8 +134,8 @@ function getSavedMovieCard(savedMovies, card) {
 
 
 
-      </>
-    )
+    </>
+  )
 }
 
 export default MoviesCardList;

@@ -15,21 +15,21 @@ function Form({
   onSubmit,
   isDisabled,
   isLoading, }) {
-    return(
-        <div className="form__container">
+  return (
+    <div className="form__container">
       <Link to="/" className="form__logo">
         <img src={logo} alt="логотип" />
       </Link>
       <h3 className="form__title">{title}</h3>
       <form className="form" id="form" onSubmit={onSubmit} noValidate>
         {children}
-        <button  type="submit"
+        <button type="submit"
           disabled={isDisabled ? true : false}
           className={
             isDisabled || isLoading
               ? 'form__button-save form__button-save_inactive'
               : 'form__button-save'
-              }>
+          }>
           {buttonText}
         </button>
       </form>
@@ -40,7 +40,7 @@ function Form({
         </Link>
       </p>
     </div>
-)
+  )
 }
 
 export default Form;

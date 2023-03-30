@@ -36,8 +36,8 @@ function Profile({ signOut, onUpdateUser, loggedIn, isLoading }) {
 
   }, [enteredValues]);
 
-    return(
-      <>
+  return (
+    <>
       <Header loggedIn={loggedIn} />
       <section className="profile">
         <h3 className="profile__title">Привет, {currentUser.name}!</h3>
@@ -90,7 +90,7 @@ function Profile({ signOut, onUpdateUser, loggedIn, isLoading }) {
         </form>
       </section>
     </>
-)
+  )
 }
 
 export default Profile;

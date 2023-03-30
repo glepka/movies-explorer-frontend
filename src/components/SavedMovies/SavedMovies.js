@@ -36,23 +36,23 @@ function SavedMovies({ loggedIn, savedMovies, onCardDelete }) {
     }
   }, [filteredMovies]);
 
-    return(
-        <>
-        <Header loggedIn={loggedIn}/>
-        <main>
+  return (
+    <>
+      <Header loggedIn={loggedIn} />
+      <main>
         <section className='movies'>
-        <SearchForm onSearchMovies={onSearchMovies} onFilter={handleShortMovies}/>
-        <MoviesCardList
-          isNotFound={isNotFound}
-          isSavedFilms={true}
-          cards={filteredMovies}
-          savedMovies={savedMovies}
-          onCardDelete={onCardDelete}/>
+          <SearchForm onSearchMovies={onSearchMovies} onFilter={handleShortMovies} />
+          <MoviesCardList
+            isNotFound={isNotFound}
+            isSavedFilms={true}
+            cards={filteredMovies}
+            savedMovies={savedMovies}
+            onCardDelete={onCardDelete} />
         </section>
-        </main>
-        <Footer />
-        </>
-    )
+      </main>
+      <Footer />
+    </>
+  )
 }
 
 export default SavedMovies;

@@ -11,6 +11,7 @@ import NotFound from '../NotFound/NotFound';
 import Profile from '../Profile/Profile';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Movies from '../Movies/Movies';
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
 
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
@@ -25,6 +26,8 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [savedMovies, setSavedMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(true);
+  const [isUpdate, setIsUpdate] = useState(false);
   const path = location.pathname;
 
 
@@ -77,9 +80,9 @@ function App() {
       .register(name, email, password)
       .then(() => {
         handleAuthorize({ email, password });
-        console.log(123)
       })
       .catch((err) => {
+        setIsSuccess(false);
         console.log(err);
       });
   }
@@ -98,6 +101,7 @@ function App() {
         }
       })
       .catch((err) => {
+        setIsSuccess(false);
         console.log(err);
       })
       .finally(() => {
@@ -111,9 +115,11 @@ function App() {
     api
       .setUserInfo(newUserInfo)
       .then((data) => {
+        setIsUpdate(true);
         setCurrentUser(data);
       })
       .catch((err) => {
+        setIsSuccess(false);
         console.log(err);
         handleUnauthorized(err);
       })
@@ -147,6 +153,7 @@ function App() {
         setSavedMovies([newMovie, ...savedMovies]);
       })
       .catch((err) => {
+        setIsSuccess(false);
         console.log(err);
         handleUnauthorized(err);
       });
@@ -159,65 +166,72 @@ function App() {
         setSavedMovies((state) => state.filter((item) => item._id !== card._id));
       })
       .catch((err) => {
+        setIsSuccess(false);
         console.log(err);
         handleUnauthorized(err);
       });
   }
 
+  function closeUnsuccessPopup() {
+    setIsSuccess(true);
+    setIsUpdate(false);
+  }
 
 
-return (
-<CurrentUserContext.Provider value={currentUser}>
-  <div className="page">
-  <div className="page__content">
-    <Switch>
-      <Route exact path="/">
-        <Header loggedIn={isLoggedIn} />
-        <Main />
-        <Footer />
-      </Route>
-      <Route path="/signin">
-      {!isLoggedIn ? (
+  return (
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="page">
+        <div className="page__content">
+          <Switch>
+            <Route exact path="/">
+              <Header loggedIn={isLoggedIn} />
+              <Main />
+              <Footer />
+            </Route>
+            <Route path="/signin">
+              {!isLoggedIn ? (
                 <Login onAuthorize={handleAuthorize} isLoading={isLoading} />
               ) : (
                 <Redirect to="/" />
               )}
-      </Route>
-      <Route path="/signup">
-      {!isLoggedIn ? (
+            </Route>
+            <Route path="/signup">
+              {!isLoggedIn ? (
                 <Register onRegister={handleRegister} isLoading={isLoading} />
               ) : (
                 <Redirect to="/" />
               )}
-      </Route>
-      <ProtectedRoute
+            </Route>
+            <ProtectedRoute
               path="/movies"
               component={Movies}
               savedMovies={savedMovies}
               loggedIn={isLoggedIn}
               onCardDelete={handleCardDelete}
               handleLikeClick={handleLikeClick}
-              ></ProtectedRoute>
-      <ProtectedRoute
+            ></ProtectedRoute>
+            <ProtectedRoute
               path="/saved-movies"
               savedMovies={savedMovies}
               loggedIn={isLoggedIn}
               onCardDelete={handleCardDelete}
               component={SavedMovies}></ProtectedRoute>
-      <ProtectedRoute
+            <ProtectedRoute
               path="/profile"
               signOut={handleSignOut}
               onUpdateUser={handleUpdateUser}
               loggedIn={isLoggedIn}
               component={Profile}
               isLoading={isLoading}></ProtectedRoute>
-      <Route path="/*">
-        <NotFound />
-      </Route>
-    </Switch>
-  </div>
-</div>
-</CurrentUserContext.Provider>
+            <Route path="/*">
+              <NotFound />
+            </Route>
+          </Switch>
+          <InfoTooltip isSuccess={isSuccess} onClose={closeUnsuccessPopup} />
+          <InfoTooltip isSuccess={!isUpdate} isUpdate={isUpdate} onClose={closeUnsuccessPopup} />
+        </div>
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 

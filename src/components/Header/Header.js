@@ -18,14 +18,14 @@ function Header({ loggedIn }) {
     setIsClicked(false);
   }
 
-    return(
-        <>
-         {!loggedIn ? (
-            <header className='header'>
-            <Link to='/' className='header__logo'>
-                <img src={logo} alt='логотип' />
-            </Link>
-            <div className='header__button-container'>
+  return (
+    <>
+      {!loggedIn ? (
+        <header className='header'>
+          <Link to='/' className='header__logo'>
+            <img src={logo} alt='логотип' />
+          </Link>
+          <div className='header__button-container'>
             <Link to='/signup' className='header__button'>
               Регистрация
             </Link>
@@ -33,38 +33,38 @@ function Header({ loggedIn }) {
               Войти
             </Link>
 
-             </div>
-            </header>
-               ) : (
-                <header className='header'>
-        <Link to='/' className='header__logo'>
-                <img src={logo} alt='логотип' />
-            </Link>
-        <nav className='header__nav'>
-        <div className='header__movies-container'>
-        <Link to='/movies' className='header__link'>
-        Фильмы
-            </Link>
-            <Link to='/saved-movies' className='header__link'>
-            Сохранённые фильмы
-            </Link>
-        </div>
-        <div className='header__account-button'>
+          </div>
+        </header>
+      ) : (
+        <header className='header'>
+          <Link to='/' className='header__logo'>
+            <img src={logo} alt='логотип' />
+          </Link>
+          <nav className='header__nav'>
+            <div className='header__movies-container'>
+              <Link to='/movies' className='header__link'>
+                Фильмы
+              </Link>
+              <Link to='/saved-movies' className='header__link'>
+                Сохранённые фильмы
+              </Link>
+            </div>
+            <div className='header__account-button'>
               <AccountButton />
             </div>
-        </nav>
+          </nav>
 
 
 
-        <button onClick={handleOpen} className='header__burger-button'></button>
-        {isClicked ? <Navigation handleClose={handleClose} /> : ''}
+          <button onClick={handleOpen} className='header__burger-button'></button>
+          {isClicked ? <Navigation handleClose={handleClose} /> : ''}
         </header>
-                )}
+      )}
 
 
 
-        </>
-    )
+    </>
+  )
 }
 
 export default Header;

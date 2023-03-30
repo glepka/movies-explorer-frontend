@@ -23,32 +23,31 @@ function MoviesCard({ card, isSavedFilms, handleLikeClick, onCardDelete, saved, 
     onCardDelete(card);
   }
 
-  const cardSaveButtonClassName = `${
-    saved ? 'card__button card__button_type_active' : 'card__button'
-  }`;
+  const cardSaveButtonClassName = `${saved ? 'card__button card__button_type_active' : 'card__button'
+    }`;
 
 
-    return(
+  return (
 
-        <li className='card'>
-              <a href={card.trailerLink} target="_blank" rel="noreferrer">
-                <img
-                  className="card__image"
-                  alt={card.nameRU}
-                  src={isSavedFilms ? card.image : `https://api.nomoreparties.co/${card.image.url}`}
-                />
-              </a>
-            <div className='card__description'>
-                <h2 className='card__name'>{card.nameRU}</h2>
-                {isSavedFilms ? (
-                    <button type="button" className="card__button card__button_type_delete" onClick={onDelete}></button>
-                  ) : (
-                    <button type="button" className={cardSaveButtonClassName} onClick={onCardClick}></button>
-                  )}
-            </div>
-            <span className='card__duration'>{durationConverter(card.duration)}</span>
-        </li>
-    )
+    <li className='card'>
+      <a href={card.trailerLink} target="_blank" rel="noreferrer">
+        <img
+          className="card__image"
+          alt={card.nameRU}
+          src={isSavedFilms ? card.image : `https://api.nomoreparties.co/${card.image.url}`}
+        />
+      </a>
+      <div className='card__description'>
+        <h2 className='card__name'>{card.nameRU}</h2>
+        {isSavedFilms ? (
+          <button type="button" className="card__button card__button_type_delete" onClick={onDelete}></button>
+        ) : (
+          <button type="button" className={cardSaveButtonClassName} onClick={onCardClick}></button>
+        )}
+      </div>
+      <span className='card__duration'>{durationConverter(card.duration)}</span>
+    </li>
+  )
 }
 
 export default MoviesCard;

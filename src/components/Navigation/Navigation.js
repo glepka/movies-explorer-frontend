@@ -6,11 +6,11 @@ import AccountButton from '../AccountButton/AccountButton';
 function Navigation({ handleClose }) {
   return (
     <div className='navigation'>
-    <div className="navigation__overlay" onClick={handleClose}></div>
-    <div className='navigation__container'>
-      <button className='navigation__close-button' onClick={handleClose}></button>
-      <nav className="navigation__nav">
-      <NavLink
+      <div className="navigation__overlay" onClick={handleClose}></div>
+      <div className='navigation__container'>
+        <button className='navigation__close-button' onClick={handleClose}></button>
+        <nav className="navigation__nav">
+          <NavLink
             exact
             to="/"
             onClick={handleClose}
@@ -32,13 +32,13 @@ function Navigation({ handleClose }) {
             activeClassName="navigation__link_active">
             Сохранённые фильмы
           </NavLink>
-  </nav>
-  <Link to='/profile' onClick={handleClose} className='navigation__account-button'>
-              <AccountButton />
-            </Link>
+        </nav>
+        <Link to='/profile' onClick={handleClose} className='navigation__account-button'>
+          <AccountButton />
+        </Link>
       </div>
 
-     </div>
+    </div>
   );
 }
 

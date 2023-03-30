@@ -15,19 +15,19 @@ function NotFound({ onAuthorize, isLoading }) {
       password: enteredValues.password,
     });
   }
-    return(
-        <Form
-        title="Рады видеть!"
-        buttonText="Войти"
-        question="Еще не зарегистрированы?"
-        linkText=" Регистрация"
-        link="/signup"
-        onSubmit={handleSubmit}
-        isDisabled={!isFormValid}
-        isLoading={isLoading}>
-        <label className="form__field">
-          E-mail
-          <input
+  return (
+    <Form
+      title="Рады видеть!"
+      buttonText="Войти"
+      question="Еще не зарегистрированы?"
+      linkText=" Регистрация"
+      link="/signup"
+      onSubmit={handleSubmit}
+      isDisabled={!isFormValid}
+      isLoading={isLoading}>
+      <label className="form__field">
+        E-mail
+        <input
           name="email"
           className="form__input"
           id="email-input"
@@ -36,22 +36,22 @@ function NotFound({ onAuthorize, isLoading }) {
           onChange={handleChange}
           pattern={EMAIL_REGEX}
           value={enteredValues.email || ''}
-          />
-          <span className="form__input-error">{errors.email}</span>
-        </label>
-        <label className="form__field">
-          Пароль
-          <input
+        />
+        <span className="form__input-error">{errors.email}</span>
+      </label>
+      <label className="form__field">
+        Пароль
+        <input
           name="password"
           className="form__input"
           id="password-input"
           type="password"
           onChange={handleChange}
-          value={enteredValues.password || ''}/>
-          <span className="form__input-error">{errors.password}</span>
-        </label>
-      </Form>
-)
+          value={enteredValues.password || ''} />
+        <span className="form__input-error">{errors.password}</span>
+      </label>
+    </Form>
+  )
 }
 
 export default NotFound;

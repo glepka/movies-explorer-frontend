@@ -46,26 +46,26 @@ function Register({ onRegister, isLoading }) {
       <label className="form__field">
         E-mail
         <input
-        name="email"
-        className="form__input"
-        id="email-input"
-        type="text"
-        required
-        onChange={handleChange}
-        pattern={EMAIL_REGEX}
-        value={enteredValues.email || ''}
+          name="email"
+          className="form__input"
+          id="email-input"
+          type="text"
+          required
+          onChange={handleChange}
+          pattern={EMAIL_REGEX}
+          value={enteredValues.email || ''}
         />
         <span className="form__input-error">{errors.email}</span>
       </label>
       <label className="form__field">
         Пароль
         <input
-        name="password"
-        className="form__input"
-        id="password-input"
-        type="password"
-        onChange={handleChange}
-        value={enteredValues.password || ''}
+          name="password"
+          className="form__input"
+          id="password-input"
+          type="password"
+          onChange={handleChange}
+          value={enteredValues.password || ''}
         />
         <span className="form__input-error">{errors.password}</span>
       </label>
