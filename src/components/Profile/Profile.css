@@ -1,138 +1,147 @@
-.profile{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 74px;
+.profile {
+  padding: 74px 0 70px 0;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  max-width: 410px;
+  box-sizing: border-box;
 }
 
-.profile__title{
-    font-style: normal;
-font-weight: 500;
-font-size: 24px;
-line-height: 29px;
-color: #000000;
-margin-bottom: 123px;
+.profile__title {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 123px;
+  text-align: center;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
 }
 
-
-
-.profile__field-container{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 410px;
-
+.profile__form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
-.profile__field-container_name{
-    padding-bottom: 16px;
-    border-bottom: 1px solid #E8E8E8;
+.profile__field {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 0;
+  padding: 0;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
+  min-height: 30px;
+  cursor: text;
+  position: relative;
 }
 
-.profile__field-container_email{
-    padding-top: 17px;
+.profile__input {
+  margin: 0;
+  padding: 0;
+  width: 350px;
+  text-align: right;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  border: none;
+  outline: none;
+  border: 1px solid transparent;
 }
 
-.profile__field{
-    font-style: normal;
-font-weight: 500;
-font-size: 11px;
-line-height: 13px;
-color: #000000;
-
+.profile__input-error {
+  margin: 0;
+  padding: 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #ff4062;
+  position: absolute;
+  top: 16px;
+  right: 0;
+  text-align: right;
 }
 
-.profile__field-value{
-    font-style: normal;
-font-weight: 400;
-font-size: 11px;
-line-height: 13px;
-color: #000000;
-border: none;
-text-align: right;
-
-}
-
-
-
-.profile__button-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-    margin-top: 220px;
-}
-
-.profile__button{
-    font-style: normal;
-    font-weight: 400;
-    font-size: 13px;
-    line-height: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #000000;
-    border: none;
-    background: none;
-    cursor: pointer;
+.profile__input:focus {
+  border: 1px solid #e8e8e8;
 
 }
 
-.profile__button:hover{
-   opacity: 0.7;
-
+.profile__border {
+  border-bottom: 1px solid #e8e8e8;
+  margin-bottom: 17px;
 }
 
+.profile__button-save {
+  margin-top: 213px;
+  min-height: 16px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: center;
+  border: none;
+  color: #000;
+  background-color: white;
+  cursor: pointer;
+}
 
-.profile__button_out{
-    color: #FF4062;
+.profile__logout {
+  margin-top: 16px;
+  min-height: 16px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: center;
+  color: #ff4062;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 1023px) {
-  .profile{
-
+  .profile {
     padding-top: 236px;
+    padding-bottom: 269px;
+  }
+
+  .profile__title {
+    margin-bottom: 96px;
+  }
+
+  .profile__button-save {
+    margin-top: 193px;
+  }
 }
 
-.profile__title{
-margin-bottom: 96px;
-}
+@media screen and (max-width: 576px) {
+  .profile {
+    padding: 70px 30px 40px 30px;
+  }
 
-.profile__button-container{
-
-  margin-top: 210px;
-}
-
-}
+  .profile__title {
+    margin-bottom: 80px;
+  }
 
 
-@media screen and (max-width: 660px) {
-  .profile{
+  .profile__input {
+    width: 150px;
+  }
 
-    padding-top: 70px;
-}
+  .profile__button-save {
+    margin-top: 362px;
+    font-size: 12px;
+    line-height: 15px;
+  }
 
-.profile__title{
-margin-bottom: 80px;
-}
-
-.profile__field-container{
-
-  width: 260px;
-
-}
-
-.profile__button-container{
-
-  margin-top: 379px;
-}
-
-.profile__button{
-
-  font-size: 12px;
-  line-height: 15px;
-
-
-}
-
+  .profile__logout {
+    font-size: 12px;
+    line-height: 15px;
+  }
 }

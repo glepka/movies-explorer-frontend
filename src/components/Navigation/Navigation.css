@@ -1,5 +1,5 @@
 .navigation{
-  display: none;
+  display: flex;
   z-index: 1;
 
 }
@@ -65,7 +65,7 @@ text-decoration: none;
 border-bottom: 2px solid transparent;
 }
 
-.navigation__link:hover{
+.navigation__link_active{
   border-bottom: 2px solid #000000;
 }
 

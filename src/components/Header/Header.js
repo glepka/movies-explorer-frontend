@@ -6,19 +6,26 @@ import Navigation from '../Navigation/Navigation';
 import AccountButton from '../AccountButton/AccountButton';
 
 
-function Header() {
+function Header({ loggedIn }) {
 
-    const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isClicked, setIsClicked] = useState(false);
 
+  function handleOpen() {
+    setIsClicked(true);
+  }
 
-    return(
-        <>
-         {!isLoggedIn ? (
-            <header className='header'>
-            <Link to='/' className='header__logo'>
-                <img src={logo} alt='логотип' />
-            </Link>
-            <div className='header__button-container'>
+  function handleClose() {
+    setIsClicked(false);
+  }
+
+  return (
+    <>
+      {!loggedIn ? (
+        <header className='header'>
+          <Link to='/' className='header__logo'>
+            <img src={logo} alt='логотип' />
+          </Link>
+          <div className='header__button-container'>
             <Link to='/signup' className='header__button'>
               Регистрация
             </Link>
@@ -26,38 +33,38 @@ function Header() {
               Войти
             </Link>
 
-             </div>
-            </header>
-               ) : (
-                <header className='header'>
-        <Link to='/' className='header__logo'>
-                <img src={logo} alt='логотип' />
-            </Link>
-        <nav className='header__nav'>
-        <div className='header__movies-container'>
-        <Link to='/movies' className='header__link'>
-        Фильмы
-            </Link>
-            <Link to='/saved-movies' className='header__link'>
-            Сохранённые фильмы
-            </Link>
-        </div>
-        <Link to='/profile' className='header__account-button'>
-              <AccountButton />
-            </Link>
-        </nav>
-
-
-
-        <button className='header__burger-button'></button>
-        <Navigation />
+          </div>
         </header>
-                )}
+      ) : (
+        <header className='header'>
+          <Link to='/' className='header__logo'>
+            <img src={logo} alt='логотип' />
+          </Link>
+          <nav className='header__nav'>
+            <div className='header__movies-container'>
+              <Link to='/movies' className='header__link'>
+                Фильмы
+              </Link>
+              <Link to='/saved-movies' className='header__link'>
+                Сохранённые фильмы
+              </Link>
+            </div>
+            <div className='header__account-button'>
+              <AccountButton />
+            </div>
+          </nav>
 
 
 
-        </>
-    )
+          <button onClick={handleOpen} className='header__burger-button'></button>
+          {isClicked ? <Navigation handleClose={handleClose} /> : ''}
+        </header>
+      )}
+
+
+
+    </>
+  )
 }
 
 export default Header;
