@@ -11,19 +11,16 @@ import Portfolio from '../Portfolio/Portfolio';
 
 function Main() {
 
+  return (
+    <main>
+      <Promo />
+      <AboutProject />
+      <Techs />
+      <AboutMe />
+      <Portfolio />
 
-
-
-    return(
-        <main>
-        <Promo />
-        <AboutProject />
-        <Techs />
-        <AboutMe />
-        <Portfolio />
-
-        </main>
-    )
+    </main>
+  )
 }
 
 export default Main;

@@ -5,16 +5,31 @@ import logo from '../../images/logo.svg'
 
 
 
-function Form({ children, title, buttonText, question, linkText, link }) {
-    return(
-        <div className="form__container">
+function Form({
+  children,
+  title,
+  buttonText,
+  question,
+  linkText,
+  link,
+  onSubmit,
+  isDisabled,
+  isLoading, }) {
+  return (
+    <div className="form__container">
       <Link to="/" className="form__logo">
         <img src={logo} alt="логотип" />
       </Link>
       <h3 className="form__title">{title}</h3>
-      <form className="form">
+      <form className="form" id="form" onSubmit={onSubmit} noValidate>
         {children}
-        <button type="submit" className="form__button-save">
+        <button type="submit"
+          disabled={isDisabled ? true : false}
+          className={
+            isDisabled || isLoading
+              ? 'form__button-save form__button-save_inactive'
+              : 'form__button-save'
+          }>
           {buttonText}
         </button>
       </form>
@@ -25,7 +40,7 @@ function Form({ children, title, buttonText, question, linkText, link }) {
         </Link>
       </p>
     </div>
-)
+  )
 }
 
 export default Form;
