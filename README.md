@@ -1,7 +1,27 @@
 # movies-explorer-frontend
 
-Ссылки на верстку: 
-https://www.figma.com/file/Ngg0a7QMgpJYULDCtd8I7Y/Diploma-(Copy)?node-id=932%3A3228&t=fpPNX0lX0yuQc8T7-1
+Сайт, на котором пользователи могут регистрироваться, искать фильмы по ключевым словам и добавлять их в избранное в личном кабинете.
 
-Ссылка выложенный на сервер фронтенд: https://glepka.movies.nomoredomains.work/movies
+## Ссылки:
++ [Макет](https://www.figma.com/file/Ngg0a7QMgpJYULDCtd8I7Y/Diploma-(Copy)?node-id=932%3A3228&t=fpPNX0lX0yuQc8T7-1)  
++ [Cайт на домене (пока не работает)](https://glepka.movies.nomoredomains.work/movies)
++ [Репозиторий с бэкендом](https://github.com/glepka/movies-explorer-api)
 
+### Функционал:
++ Авторизация и регистрация пользователей
++ Редактирование профиля
++ Поиск фильмов по ключевым словам
++ Поиск фильмов по длительности
++ Сохрание фильмов в избранное в личном кабинете
+
+### Технологии:
++ HTML5
++ CCS3
++ JavaScript (стандарт ES6)
++ React (Create React App, портирование разметки в JSX, функциональные компоненты + хуки)
++ Адаптивная верстка (мобильные устройства, планшеты, десктопы)
++ Flexbox
++ Grid Layout
++ Позиционирование
++ Псевдоклассы
++ Webpack
